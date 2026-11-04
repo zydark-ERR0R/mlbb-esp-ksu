@@ -1,0 +1,36 @@
+# Built outputs — never commit, use GitHub Releases
+*.apk
+*.zip
+*.aab
+
+# Android build artifacts
+/app/build/
+/.gradle/
+/build/
+
+# Gradle wrapper (commit these if you want reproducible builds)
+!gradle/wrapper/gradle-wrapper.jar
+!gradle/wrapper/gradle-wrapper.properties
+
+# NDK / CMake build output
+.externalNativeBuild/
+
+# IDE
+/.idea/
+*.iml
+.DS_Store
+local.properties
+
+# Signing keys — NEVER commit
+*.jks
+*.keystore
+*.p12
+
+# Dump artifacts — pulled from device, not ours to distribute
+libil2cpp.so
+global-metadata.dat
+dump_out/
+*.cs
+
+# Logs
+*.log
