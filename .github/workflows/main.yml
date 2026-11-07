@@ -1,0 +1,40 @@
+name: Build mlbb-esp-ksu by ZYDARK ERROR
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install NDK 26.1
+        run: |
+          sdkmanager "ndk;26.1.10909125"
+          echo "ANDROID_NDK_HOME=$ANDROID_HOME/ndk/26.1.10909125" >> $GITHUB_ENV
+
+      - name: Make build script executable
+        run: chmod +x build_and_package.sh
+
+      - name: Run build script
+        run: bash build_and_package.sh
+
+      - name: Upload module zip (ZYDARK ERROR)
+        uses: actions/upload-artifact@v4
+        with:
+          name: mlbb-esp-ksu-ZYDARK-ERROR
+          path: "*.zip"
