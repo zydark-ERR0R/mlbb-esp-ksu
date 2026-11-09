@@ -33,8 +33,12 @@ jobs:
           echo "sdk.dir=$ANDROID_HOME" > local.properties
           echo "ndk.dir=$ANDROID_HOME/ndk/26.1.10909125" >> local.properties
 
-      - name: Grant execute permission to gradlew
-        run: chmod +x gradlew
+      - name: Generate Gradle wrapper if missing
+        run: |
+          if [ ! -f gradlew ]; then
+            gradle wrapper --gradle-version 8.2
+          fi
+          chmod +x gradlew
 
       - name: Make build script executable
         run: chmod +x build_and_package.sh
